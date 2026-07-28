@@ -2,7 +2,9 @@
 python -m venv venv
 
 # 2. Activar el entorno virtual
-venv\Scripts\activate
+.\venv\Scripts\Activate.ps1
 
 # 3. Instalar librerias
-pip install requirements.txt
+pip install -r requirements.txt
+
+Set-ExecutionPolicy Unrestricted -Scope Process
