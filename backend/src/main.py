@@ -1,5 +1,6 @@
 # main.py o src/main.py
-from fastapi import FastAPI
+from fastapi import FastAPI  # pyright: ignore[reportMissingImports]
+from fastapi.middleware.cors import CORSMiddleware  # pyright: ignore[reportMissingImports]
 from src.routers.province import router as province_router
 from src.routers.city import router as city_router
 from src.routers.neighborhood import router as neighborhood_router
@@ -11,6 +12,18 @@ from src.routers.product import router as inventory_router
 
 
 app = FastAPI(title="Nico API Backend")
+
+origins = [
+    "http://localhost:5173",  # Puerto por defecto de Vite
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+     allow_credentials=True,
+    allow_methods=["*"],                     # Permite OPTIONS, POST, GET, etc.
+    allow_headers=["*"], 
+)
 
 # Registrar las rutas de los CRUD
 app.include_router(province_router)
